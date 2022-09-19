@@ -41,3 +41,15 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
+  - name: Carrots
+    uniqueID: 54002939
+    locked: 0
+  - name: Portal
+    uniqueID: 1191243659
+    locked: 0
+  - name: Player
+    uniqueID: 912419591
+    locked: 0
+  - name: Planet
+    uniqueID: 4054881405
+    locked: 0
