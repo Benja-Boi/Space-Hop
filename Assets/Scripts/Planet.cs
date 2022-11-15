@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -9,7 +10,15 @@ public class Planet : MonoBehaviour
     private CircleCollider2D _cc;
     private Rigidbody2D _rb;
 
-    public float Radius { get; private set; } = 1f;
+    public float radius = 1f;
+    public float attractionRadius = 2f;
+    public float gravitationModifier = .1f;
+
+    
+    [SerializeField] public float Radius { get => radius; private set => radius = value;}
+    [SerializeField] public float AttractionRadius { get => attractionRadius; private set => attractionRadius = value;}
+    [SerializeField] public float GravitationModifier { get => gravitationModifier; private set => gravitationModifier = value;}
+    public bool GravityEnabled { get; set; } = true;
     public Rigidbody2D rb { get; }
 
     public Vector2 Position => this.transform.position;
@@ -24,5 +33,11 @@ public class Planet : MonoBehaviour
     public void CatchPlayer()
     {
         _rb.isKinematic = true;
+    }
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.DrawWireSphere(Position, Radius);
+        Gizmos.DrawWireSphere(Position, AttractionRadius);
     }
 }

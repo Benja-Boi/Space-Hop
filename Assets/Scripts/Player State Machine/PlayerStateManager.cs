@@ -2,22 +2,15 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Serialization;
 
-[RequireComponent(typeof(Rigidbody2D))]
-[RequireComponent(typeof(SpringJoint2D))]
 public class PlayerStateManager : MonoBehaviour
 {
     //
-    public float LaunchBaseForce { get; } = 50f;
-    public float AttractionForce { get; } = 5f;
-    public float AttractionRange { get; } = 0.3f;
-    public float LandingRange { get; } = 0.1f;
-    public float MaxDragDistance { get; } = 1f;
     public Planet CurrentPlanet { get; set; }
     
     // Components
-    public Rigidbody2D rb;
-    public SpringJoint2D sj;
+    [FormerlySerializedAs("Controller")] public PlayerController controller;
     public Camera cam;
     
     
@@ -33,9 +26,8 @@ public class PlayerStateManager : MonoBehaviour
 
     private void Awake()
     {
-        rb = GetComponent<Rigidbody2D>();
-        sj = GetComponent<SpringJoint2D>();
         cam = FindObjectOfType<Camera>();
+        controller = GetComponent<PlayerController>();
         CurrentPlanet = FindObjectOfType<Planet>();
         transform.position = new Vector2(CurrentPlanet.Position.x, CurrentPlanet.Position.y + CurrentPlanet.Radius);
     }

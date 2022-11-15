@@ -27,4 +27,17 @@ public class PlanetManager : MonoBehaviour
     {
         if (this == _instance) { _instance = null; }
     }
+
+    public void DisableGravity(float duration, Planet p)
+    {
+        p.GravityEnabled = false;
+        IEnumerator x = EnableGravity(duration, p);
+        StartCoroutine(x);
+    }
+    
+    IEnumerator EnableGravity(float duration, Planet p){
+        yield return new WaitForSeconds(duration);
+        p.GravityEnabled = true;
+    }
+    
 }

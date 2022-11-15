@@ -16,28 +16,31 @@ public class PlayerAttractedState : PlayerBaseState
 
     public override void OnStateUpdate(PlayerStateManager player)
     {
-        float dist = Vector2.Distance(player.Position, player.CurrentPlanet.Position);
+        Planet p = player.CurrentPlanet;
+        float dist = Vector2.Distance(player.Position, p.Position);
 
-        if (dist <= player.LandingRange)
+        if (dist <= p.Radius)
         {
             // Land on planet
             player.SwitchState(player.DockedState);
         }
         else
         {
-            if (dist > player.AttractionRange)
+            if (dist > p.AttractionRadius)
             {
                 // Exit gravity
                 player.SwitchState(player.FloatingState);
             }
         }
+        
+        // Player gravitates toward planet
+        Vector2 dirToPlanet = (p.Position - player.Position).normalized;
+        player.controller.Direction =
+            p.GravitationModifier * dirToPlanet + (1 - p.GravitationModifier) * player.controller.Direction;
     }
-    
+
     public override void OnStateFixedUpdate(PlayerStateManager player)
     {
-        // Player gravitates toward planet
-        Vector2 dir = (player.CurrentPlanet.Position - player.Position).normalized;
-        player.rb.velocity = new Vector2(dir.x, dir.y) * player.AttractionForce;
     }
 
     public override void OnCollisionEnter(PlayerStateManager player)

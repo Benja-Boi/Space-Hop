@@ -370,8 +370,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 199d5a3772f121f43b16ce3bfbd3fb48, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rb: {fileID: 0}
-  sj: {fileID: 0}
+  controller: {fileID: 0}
   cam: {fileID: 0}
   currentState: 
 --- !u!1 &988203048
@@ -1003,6 +1002,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 70f405b1670234146bce4cb72bace425, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  radius: 1
+  attractionRadius: 2
+  gravitationModifier: 2
 --- !u!212 &1475521760
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -1079,10 +1081,9 @@ GameObject:
   - component: {fileID: 1780064806}
   - component: {fileID: 1780064808}
   - component: {fileID: 1780064810}
-  - component: {fileID: 1780064809}
   - component: {fileID: 583905279}
   - component: {fileID: 1780064805}
-  - component: {fileID: 1780064807}
+  - component: {fileID: 1780064811}
   m_Layer: 0
   m_Name: Cpt. Hop
   m_TagString: Untagged
@@ -1135,26 +1136,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!231 &1780064807
-SpringJoint2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1780064804}
-  m_Enabled: 1
-  serializedVersion: 4
-  m_EnableCollision: 0
-  m_ConnectedRigidBody: {fileID: 0}
-  m_BreakForce: Infinity
-  m_BreakTorque: Infinity
-  m_AutoConfigureConnectedAnchor: 1
-  m_Anchor: {x: 0, y: 0.8}
-  m_ConnectedAnchor: {x: 0.045, y: 1.242}
-  m_AutoConfigureDistance: 0
-  m_Distance: 0.3
-  m_DampingRatio: 0
-  m_Frequency: 0.8
 --- !u!212 &1780064808
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -1206,27 +1187,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!50 &1780064809
-Rigidbody2D:
-  serializedVersion: 4
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1780064804}
-  m_BodyType: 0
-  m_Simulated: 1
-  m_UseFullKinematicContacts: 0
-  m_UseAutoMass: 0
-  m_Mass: 1
-  m_LinearDrag: 0
-  m_AngularDrag: 0.05
-  m_GravityScale: 0
-  m_Material: {fileID: 0}
-  m_Interpolate: 0
-  m_SleepingMode: 1
-  m_CollisionDetection: 0
-  m_Constraints: 4
 --- !u!70 &1780064810
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -1237,12 +1197,26 @@ CapsuleCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0.8}
   m_Size: {x: 1, y: 2}
   m_Direction: 0
+--- !u!114 &1780064811
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1780064804}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e2ba78f398648cf4d8f2b4966e472cc0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _drag: 0.6
+  _hopForce: 0
 --- !u!1 &1786111911
 GameObject:
   m_ObjectHideFlags: 0
@@ -1688,6 +1662,10 @@ PrefabInstance:
     - target: {fileID: 6329664426706351128, guid: cebd6b108767d9e43936666f2a8ff143, type: 3}
       propertyPath: m_Name
       value: Planet
+      objectReference: {fileID: 0}
+    - target: {fileID: 6329664426706351129, guid: cebd6b108767d9e43936666f2a8ff143, type: 3}
+      propertyPath: radius
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 6329664426706351130, guid: cebd6b108767d9e43936666f2a8ff143, type: 3}
       propertyPath: m_Color.b
