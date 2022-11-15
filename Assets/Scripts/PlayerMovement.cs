@@ -7,11 +7,10 @@ using UnityEngine;
 public class PlayerMovement : MonoBehaviour
 {
     public float _force;
-
-    [SerializeField]
-    private float _magnetizeRange = 0.2f;
-    [SerializeField]
-    private Planet _currentPlanet;
+    [SerializeField] private float _magnetizeRange = 0.2f;
+    [SerializeField] private Planet _currentPlanet;
+    
+    
     private bool _grounded;
     private Vector2 _mousePos;
     private Camera _cam;
@@ -35,7 +34,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void Update()
     {
-        _mousePos = _cam.ScreenToWorldPoint(Input.mousePosition);
+        _mousePos = Vector2.zero;
         if (!_grounded)
         {
             SeekPlanet();
@@ -52,7 +51,7 @@ public class PlayerMovement : MonoBehaviour
         foreach (Planet p in planets)
         {
             float dist = Vector2.Distance(transform.position, p.Position);
-            if (dist - p.Radius <= p.GravityRange)
+            if (dist - p.Radius <= 1)
             {
                 MagnetizeToPlanet(p);
             }

@@ -9,20 +9,16 @@ public class Planet : MonoBehaviour
     private CircleCollider2D _cc;
     private Rigidbody2D _rb;
 
-    [SerializeField]
-    private float _radius;
-    public float Radius { get { return _radius; } }
+    public float Radius { get; private set; } = 1f;
+    public Rigidbody2D rb { get; }
 
-    [SerializeField]
-    private float _gravityRange;
-    public float GravityRange { get { return _gravityRange; } }
-    public Vector2 Position { get { return this.transform.position; } }
+    public Vector2 Position => this.transform.position;
 
     private void Awake()
     {
         _cc = GetComponent<CircleCollider2D>();
         _rb = GetComponent<Rigidbody2D>();
-        _radius = transform.localScale.x * _cc.radius;
+        Radius = transform.localScale.x * _cc.radius;
     }
 
     public void CatchPlayer()

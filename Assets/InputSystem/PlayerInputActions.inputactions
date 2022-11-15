@@ -1,0 +1,34 @@
+{
+    "name": "PlayerInputActions",
+    "maps": [
+        {
+            "name": "Player",
+            "id": "37cfb0b3-0a18-4652-b052-da8d1d62af8c",
+            "actions": [
+                {
+                    "name": "MouseListener",
+                    "type": "Button",
+                    "id": "2508f44e-a6aa-4be6-b209-61d781ff12d8",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "6efa2784-e859-4b84-be8f-54c5cb06150c",
+                    "path": "<Mouse>/press",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "MouseListener",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        }
+    ],
+    "controlSchemes": []
+}
