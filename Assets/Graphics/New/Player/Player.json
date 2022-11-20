@@ -1,0 +1,44 @@
+{ "skeleton": { "images": "C:/Works/Space-Hop/Assets/Graphics/New/Player/images/" },
+"bones": [
+	{ "name": "root" }
+],
+"slots": [
+	{ "name": "body", "bone": "root", "attachment": "body" },
+	{ "name": "ear", "bone": "root", "attachment": "ear" },
+	{ "name": "head", "bone": "root", "attachment": "head" },
+	{ "name": "helmet", "bone": "root", "attachment": "helmet" },
+	{ "name": "eye", "bone": "root", "attachment": "eye" },
+	{ "name": "sweat-drop", "bone": "root", "attachment": "sweat-drop" },
+	{ "name": "aim-bar", "bone": "root", "attachment": "aim-bar" },
+	{ "name": "aim-target", "bone": "root", "attachment": "aim-target" }
+],
+"skins": {
+	"default": {
+		"body": {
+			"body": { "x": -5, "y": 128, "width": 256, "height": 256 }
+		},
+		"ear": {
+			"ear": { "x": -86.5, "y": 499, "width": 93, "height": 314 }
+		},
+		"head": {
+			"head": { "x": -4.5, "y": 407, "width": 257, "height": 230 }
+		},
+		"helmet": {
+			"helmet": { "x": -5, "y": 511.5, "width": 480, "height": 441 }
+		},
+		"eye": {
+			"eye": { "x": -74, "y": 428.5, "width": 64, "height": 65 }
+		},
+		"sweat-drop": {
+			"sweat-drop": { "x": -303, "y": 423.5, "width": 30, "height": 57 }
+		},
+		"aim-bar": {
+			"aim-bar": { "x": -6, "y": 981, "width": 206, "height": 80 }
+		},
+		"aim-target": {
+			"aim-target": { "x": -5.5, "y": 840, "width": 141, "height": 164 }
+		}
+	}
+},
+"animations": { "animation": {} }
+}
