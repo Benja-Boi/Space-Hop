@@ -1729,7 +1729,27 @@ PrefabInstance:
       propertyPath: m_Name
       value: Cpt. Hop
       objectReference: {fileID: 0}
+    - target: {fileID: 7136551479640495880, guid: 9d91dc3c31f7ae645b5afb0d2768a79b, type: 3}
+      propertyPath: m_Materials.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 7136551479640495880, guid: 9d91dc3c31f7ae645b5afb0d2768a79b, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: bd0947ce0e898a1459168615b43c835d, type: 2}
+    - target: {fileID: 7136551479640495880, guid: 9d91dc3c31f7ae645b5afb0d2768a79b, type: 3}
+      propertyPath: m_Materials.Array.data[1]
+      value: 
+      objectReference: {fileID: 2100000, guid: 37307335799a09e4284cc1de79d11c56, type: 2}
+    - target: {fileID: 7136551479640495880, guid: 9d91dc3c31f7ae645b5afb0d2768a79b, type: 3}
+      propertyPath: m_Materials.Array.data[2]
+      value: 
+      objectReference: {fileID: 2100000, guid: bd0947ce0e898a1459168615b43c835d, type: 2}
     - target: {fileID: 7136551479640495887, guid: 9d91dc3c31f7ae645b5afb0d2768a79b, type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 8469442612003405122, guid: 9d91dc3c31f7ae645b5afb0d2768a79b, type: 3}
       propertyPath: m_Mesh
       value: 
       objectReference: {fileID: 0}
