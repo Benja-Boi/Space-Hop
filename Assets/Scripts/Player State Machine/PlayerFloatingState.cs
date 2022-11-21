@@ -1,17 +1,15 @@
 ﻿using System;
 using JetBrains.Annotations;
+using UnityEditor.MPE;
 using UnityEngine;
 
 public class PlayerFloatingState : PlayerBaseState
 {
     public override string Name => "Floating";
-    private bool _attractionEnable = false;
-    private float _timer = 1f;
-    
+
     public override void OnStateEnter(PlayerStateManager player)
     {
-        _timer = 1f;
-        _attractionEnable = false;
+        
     }
 
     public override void OnStateExit(PlayerStateManager player)
@@ -21,13 +19,12 @@ public class PlayerFloatingState : PlayerBaseState
 
     public override void OnStateUpdate(PlayerStateManager player)
     {
-        if (_timer > 0f)
+        player.controller.Float();
+        Planet p = SeekPlanet(player);
+        if (p != null)
         {
-            TimerCountdown();
-        }
-        if (_attractionEnable)
-        {
-            SeekPlanet(player);
+            player.CurrentPlanet = p;
+            player.SwitchState(player.AttractedState);
         }
     }
     
@@ -41,36 +38,29 @@ public class PlayerFloatingState : PlayerBaseState
         
     }
 
-    private void SeekPlanet(PlayerStateManager player)
+    private Planet SeekPlanet(PlayerStateManager player)
     {
+        // Get list of planets
         Planet[] planets = PlanetManager.Instance.Planets;
         Planet closestPlanet = null;
         float minDist = 1000f;
         
-        // Find the closest planet within attraction range
+        // Find the closest planet that attracts the player
         foreach (Planet p in planets)
         {
-            float dist = Vector2.Distance(player.Position, p.Position);
-            if ((dist - p.Radius <= player.AttractionRange) && (dist < minDist))
+            if (p.GravityEnabled)
             {
-                minDist = dist;
-                closestPlanet = p;
+                float dist = Vector2.Distance(player.Position, p.Position);
+                if ((dist <= p.AttractionRadius) && (dist < minDist))
+                {
+                    minDist = dist;
+                    closestPlanet = p;
+                }
             }
         }
         
-        // If such planet is found, move towards it
-        if (closestPlanet == null) return;
-        player.CurrentPlanet = closestPlanet;
-        player.SwitchState(player.AttractedState);
-
+        // If such planet is found, return it
+        return closestPlanet;
     }
 
-    private void TimerCountdown()
-    {
-        _timer -= Time.deltaTime;
-        if (_timer <= 0)
-        {
-            _attractionEnable = true;
-        }
-    }
 }

@@ -2,23 +2,20 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Serialization;
 
-[RequireComponent(typeof(Rigidbody2D))]
-[RequireComponent(typeof(SpringJoint2D))]
 public class PlayerStateManager : MonoBehaviour
 {
-    //
-    public float LaunchBaseForce { get; } = 50f;
-    public float AttractionForce { get; } = 5f;
-    public float AttractionRange { get; } = 0.3f;
-    public float LandingRange { get; } = 0.1f;
-    public float MaxDragDistance { get; } = 1f;
-    public Planet CurrentPlanet { get; set; }
+
+    public static event Action<Planet> PlayerDocked;
     
+    //
+    public Planet CurrentPlanet { get; set; }
+
     // Components
-    public Rigidbody2D rb;
-    public SpringJoint2D sj;
+    public PlayerController controller;
     public Camera cam;
+    private int j;
     
     
     // States
@@ -33,15 +30,13 @@ public class PlayerStateManager : MonoBehaviour
 
     private void Awake()
     {
-        rb = GetComponent<Rigidbody2D>();
-        sj = GetComponent<SpringJoint2D>();
         cam = FindObjectOfType<Camera>();
-        CurrentPlanet = FindObjectOfType<Planet>();
-        transform.position = new Vector2(CurrentPlanet.Position.x, CurrentPlanet.Position.y + CurrentPlanet.Radius);
+        controller = GetComponent<PlayerController>();
     }
 
     private void Start()
     {
+        FindStartingStar();
         SwitchState(DockedState);
     }
 
@@ -59,7 +54,41 @@ public class PlayerStateManager : MonoBehaviour
     {
         _currentState = state;
         currentState = _currentState.Name;
-        Debug.Log("Switched state to: " + currentState);
         _currentState.OnStateEnter(this);
+        if (_currentState == DockedState)
+        {
+            PlayerDocked?.Invoke(CurrentPlanet);
+        }
+        Debug.Log("Switched state to: " + currentState);
     }
+
+    private void FindStartingStar()
+    {
+        float minDist = 10000f;
+        Planet closestPlanet = null;
+        foreach(Planet p in PlanetManager.Instance.Planets)
+        {
+            float dist = Vector2.Distance(transform.position, p.Position);
+            if (dist < minDist)
+            {
+                minDist = dist;
+                closestPlanet = p;
+            }
+        }
+
+        if (closestPlanet == null)
+        {
+            throw new Exception("No planet found closer than 10000 units");
+        }
+
+        CurrentPlanet = closestPlanet;
+        transform.position = new Vector2(CurrentPlanet.Position.x, CurrentPlanet.Position.y + CurrentPlanet.Radius);
+    }
+}
+
+public enum PlayerStates
+{
+    Docked,
+    Floating,
+    Attracted
 }
