@@ -6,12 +6,16 @@ using UnityEngine.Serialization;
 
 public class PlayerStateManager : MonoBehaviour
 {
+
+    public static event Action<Planet> PlayerDocked;
+    
     //
     public Planet CurrentPlanet { get; set; }
-    
+
     // Components
-    [FormerlySerializedAs("Controller")] public PlayerController controller;
+    public PlayerController controller;
     public Camera cam;
+    private int j;
     
     
     // States
@@ -28,12 +32,11 @@ public class PlayerStateManager : MonoBehaviour
     {
         cam = FindObjectOfType<Camera>();
         controller = GetComponent<PlayerController>();
-        CurrentPlanet = FindObjectOfType<Planet>();
-        transform.position = new Vector2(CurrentPlanet.Position.x, CurrentPlanet.Position.y + CurrentPlanet.Radius);
     }
 
     private void Start()
     {
+        FindStartingStar();
         SwitchState(DockedState);
     }
 
@@ -51,7 +54,41 @@ public class PlayerStateManager : MonoBehaviour
     {
         _currentState = state;
         currentState = _currentState.Name;
-        Debug.Log("Switched state to: " + currentState);
         _currentState.OnStateEnter(this);
+        if (_currentState == DockedState)
+        {
+            PlayerDocked?.Invoke(CurrentPlanet);
+        }
+        Debug.Log("Switched state to: " + currentState);
     }
+
+    private void FindStartingStar()
+    {
+        float minDist = 10000f;
+        Planet closestPlanet = null;
+        foreach(Planet p in PlanetManager.Instance.Planets)
+        {
+            float dist = Vector2.Distance(transform.position, p.Position);
+            if (dist < minDist)
+            {
+                minDist = dist;
+                closestPlanet = p;
+            }
+        }
+
+        if (closestPlanet == null)
+        {
+            throw new Exception("No planet found closer than 10000 units");
+        }
+
+        CurrentPlanet = closestPlanet;
+        transform.position = new Vector2(CurrentPlanet.Position.x, CurrentPlanet.Position.y + CurrentPlanet.Radius);
+    }
+}
+
+public enum PlayerStates
+{
+    Docked,
+    Floating,
+    Attracted
 }

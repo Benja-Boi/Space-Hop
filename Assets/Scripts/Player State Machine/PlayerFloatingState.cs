@@ -6,13 +6,10 @@ using UnityEngine;
 public class PlayerFloatingState : PlayerBaseState
 {
     public override string Name => "Floating";
-    private bool _attractionEnable = false;
-    private float _timer = 1f;
-    
+
     public override void OnStateEnter(PlayerStateManager player)
     {
-        _timer = 1f;
-        _attractionEnable = false;
+        
     }
 
     public override void OnStateExit(PlayerStateManager player)
@@ -43,6 +40,7 @@ public class PlayerFloatingState : PlayerBaseState
 
     private Planet SeekPlanet(PlayerStateManager player)
     {
+        // Get list of planets
         Planet[] planets = PlanetManager.Instance.Planets;
         Planet closestPlanet = null;
         float minDist = 1000f;
@@ -61,7 +59,7 @@ public class PlayerFloatingState : PlayerBaseState
             }
         }
         
-        // If such planet is found, move towards it
+        // If such planet is found, return it
         return closestPlanet;
     }
 
