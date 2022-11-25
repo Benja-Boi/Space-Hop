@@ -8,16 +8,12 @@ public class PlayerStateManager : MonoBehaviour
 {
 
     public static event Action<Planet> PlayerDocked;
-    
-    //
-    public Planet CurrentPlanet { get; set; }
 
     // Components
+    public Planet CurrentPlanet { get; set; }
     public PlayerController controller;
     public Camera cam;
-    private int j;
-    
-    
+
     // States
     [SerializeField] private string currentState;
     private PlayerBaseState _currentState;

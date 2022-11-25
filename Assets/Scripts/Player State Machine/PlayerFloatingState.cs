@@ -20,12 +20,7 @@ public class PlayerFloatingState : PlayerBaseState
     public override void OnStateUpdate(PlayerStateManager player)
     {
         player.controller.Float();
-        Planet p = SeekPlanet(player);
-        if (p != null)
-        {
-            player.CurrentPlanet = p;
-            player.SwitchState(player.AttractedState);
-        }
+        SeekAndLand(player);
     }
     
     public override void OnStateFixedUpdate(PlayerStateManager player)
@@ -38,6 +33,16 @@ public class PlayerFloatingState : PlayerBaseState
         
     }
 
+    private void SeekAndLand(PlayerStateManager player)
+    {
+        Planet p = SeekPlanet(player);
+        if (p != null)
+        {
+            player.CurrentPlanet = p;
+            player.SwitchState(player.AttractedState);
+        }
+    }
+    
     private Planet SeekPlanet(PlayerStateManager player)
     {
         // Get list of planets

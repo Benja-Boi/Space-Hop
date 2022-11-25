@@ -27,7 +27,7 @@ public class Planet : MonoBehaviour
     {
         _cc = GetComponent<CircleCollider2D>();
         _rb = GetComponent<Rigidbody2D>();
-        Radius = transform.localScale.x * _cc.radius;
+        //Radius = transform.localScale.x * _cc.radius;
     }
 
     public void CatchPlayer()

@@ -12,9 +12,20 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float hopForce;
     [SerializeField] private float velocity;
     private Vector2 _direction;
-    public Vector2 Direction {
+    public Vector2 Direction
+    {
         get => _direction;
-        set => _direction = value.normalized;
+        set
+        {
+            _direction = value.normalized;
+            PointTowardsMovement();
+        }
+    }
+
+    private float Velocity
+    {
+        get => velocity;
+        set => velocity = value;
     }
     private Transform _transform;
     private Collider2D _collider;
@@ -28,21 +39,17 @@ public class PlayerController : MonoBehaviour
     private void Start()
     {
         velocity = 0;
-        _direction = Vector2.up;
+        Direction = Vector2.up;
     }
 
     private void Update()
     {
         UpdatePosition();
-        if (Input.GetKeyDown("space"))
-        {
-            velocity = 1;
-        }
     }
 
     private void UpdatePosition()
     {
-        _transform.position += (Vector3) (Time.deltaTime * velocity * _direction);
+        _transform.position += (Vector3) (Time.deltaTime * velocity * Direction);
     }
 
     private void OnTriggerEnter2D(Collider2D other)
@@ -50,9 +57,9 @@ public class PlayerController : MonoBehaviour
         if (other.gameObject.CompareTag("Wall"))
         {
             Vector3 currentPos = transform.position;
-            if (_direction.x >= 0)
+            if (Direction.x >= 0)
             {
-                if (_direction.y >= 0)
+                if (Direction.y >= 0)
                 {
                     // Moving up and right, can't collide with left and bottom walls
                     if (other.bounds.min.y > currentPos.y)
@@ -82,7 +89,7 @@ public class PlayerController : MonoBehaviour
                 }
             }
             else{
-                if (_direction.y >= 0)
+                if (Direction.y >= 0)
                 {
                     // Moving up and left, can't collide with right and bottom walls
                     if (other.bounds.min.y > currentPos.y)
@@ -115,14 +122,19 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    private void PointTowardsMovement()
+    {
+        transform.up = Direction;
+    }
+    
     private void FlipDirX()
     {
-        _direction = new Vector2(-_direction.x, _direction.y);
+        Direction = new Vector2(-Direction.x, Direction.y);
     }
 
     private void FlipDirY()
     {
-        _direction = new Vector2(_direction.x, -_direction.y);
+        Direction = new Vector2(Direction.x, -Direction.y);
     }
     
     public void Launch(float charge)
@@ -157,15 +169,10 @@ public class PlayerController : MonoBehaviour
         velocity = 0;
     }
 
-    public void Rotate()
-    {
-        
-    }
-
     public void AddForce(Vector2 force)
     {
-        Vector2 newMovementVector = velocity * _direction + force;
-        _direction = newMovementVector.normalized;
+        Vector2 newMovementVector = velocity * Direction + force;
+        Direction = newMovementVector.normalized;
         velocity = newMovementVector.magnitude;
     }
 }

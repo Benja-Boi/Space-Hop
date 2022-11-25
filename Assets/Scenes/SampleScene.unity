@@ -365,6 +365,22 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 485956110106188194, guid: cebd6b108767d9e43936666f2a8ff143, type: 3}
+      propertyPath: opacity
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3052555677951065516, guid: cebd6b108767d9e43936666f2a8ff143, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3052555677951065516, guid: cebd6b108767d9e43936666f2a8ff143, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3052555677951065516, guid: cebd6b108767d9e43936666f2a8ff143, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6329664426706351128, guid: cebd6b108767d9e43936666f2a8ff143, type: 3}
       propertyPath: m_Name
       value: Planet 2
@@ -375,7 +391,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6329664426706351129, guid: cebd6b108767d9e43936666f2a8ff143, type: 3}
       propertyPath: attractionRadius
-      value: 2
+      value: 2.5
       objectReference: {fileID: 0}
     - target: {fileID: 6329664426706351129, guid: cebd6b108767d9e43936666f2a8ff143, type: 3}
       propertyPath: gravitationModifier
@@ -1342,8 +1358,9 @@ GameObject:
   - component: {fileID: 1904828683}
   - component: {fileID: 1904828682}
   - component: {fileID: 1904828681}
+  - component: {fileID: 1904828684}
   m_Layer: 5
-  m_Name: Button
+  m_Name: Reset Level
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1412,7 +1429,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1904828682}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1904828684}
+        m_TargetAssemblyTypeName: ResetLevelButton, Assembly-CSharp
+        m_MethodName: ResetLevel
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1904828682
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1451,6 +1480,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1904828679}
   m_CullTransparentMesh: 1
+--- !u!114 &1904828684
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1904828679}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 488a1b64ec4a3114ca11bd73007b7db4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1930194864
 GameObject:
   m_ObjectHideFlags: 0
@@ -1618,7 +1659,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6329664426706351129, guid: cebd6b108767d9e43936666f2a8ff143, type: 3}
       propertyPath: gravitationModifier
-      value: 2
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 6329664426706351131, guid: cebd6b108767d9e43936666f2a8ff143, type: 3}
       propertyPath: m_RootOrder
@@ -1676,6 +1717,22 @@ PrefabInstance:
     - target: {fileID: 7136551478346607936, guid: 9d91dc3c31f7ae645b5afb0d2768a79b, type: 3}
       propertyPath: hopForce
       value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7136551478346607937, guid: 9d91dc3c31f7ae645b5afb0d2768a79b, type: 3}
+      propertyPath: m_Size.x
+      value: 0.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7136551478346607937, guid: 9d91dc3c31f7ae645b5afb0d2768a79b, type: 3}
+      propertyPath: m_Size.y
+      value: 0.51
+      objectReference: {fileID: 0}
+    - target: {fileID: 7136551478346607937, guid: 9d91dc3c31f7ae645b5afb0d2768a79b, type: 3}
+      propertyPath: m_Offset.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7136551478346607937, guid: 9d91dc3c31f7ae645b5afb0d2768a79b, type: 3}
+      propertyPath: m_Offset.y
+      value: 0.25
       objectReference: {fileID: 0}
     - target: {fileID: 7136551478346607937, guid: 9d91dc3c31f7ae645b5afb0d2768a79b, type: 3}
       propertyPath: m_IsTrigger

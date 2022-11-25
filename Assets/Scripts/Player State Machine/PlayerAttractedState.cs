@@ -48,7 +48,7 @@ public class PlayerAttractedState : PlayerBaseState
                 //Vector2 moveDir = adjustedGravitationModifer * dirToPlanet + (1 - adjustedGravitationModifer) * player.controller.Direction;
                 //player.controller.PointTowards(moveDir);
                 //player.controller.Direction = moveDir;
-                player.controller.AddForce(Time.deltaTime * p.gravitationModifier * dirToPlanet);
+                player.controller.AddForce(Time.deltaTime * p.GravitationModifier * dirToPlanet);
             }
             else
             {
