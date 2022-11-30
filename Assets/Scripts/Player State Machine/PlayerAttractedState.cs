@@ -42,13 +42,8 @@ public class PlayerAttractedState : PlayerBaseState
         {
             if (dist > p.Radius)
             {
-                // Player gravitates toward planet
                 Vector2 dirToPlanet = (p.Position - player.Position).normalized;
-                //float adjustedGravitationModifer = p.GravitationModifier * Time.deltaTime;
-                //Vector2 moveDir = adjustedGravitationModifer * dirToPlanet + (1 - adjustedGravitationModifer) * player.controller.Direction;
-                //player.controller.PointTowards(moveDir);
-                //player.controller.Direction = moveDir;
-                player.controller.AddForce(Time.deltaTime * p.GravitationModifier * dirToPlanet);
+                player.controller.AddForce(Time.deltaTime * p.GravitationModifier * dirToPlanet );
             }
             else
             {
